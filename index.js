@@ -18,9 +18,16 @@ function initialize() {
 
             tile.id = r.toString() + "-" + c.toString();
             tile.classList.add("tile");
-            tile.innerText = "P";
+            tile.innerText = "";
 
             document.getElementById("board").appendChild(tile);
         }
     }
+
+    document.addEventListener("keyup", (e) => {
+        if (gameOver) return;
+
+        alert(e.code)
+
+    })
 }
