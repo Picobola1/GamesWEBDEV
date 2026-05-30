@@ -27,7 +27,12 @@ function initialize() {
     document.addEventListener("keyup", (e) => {
         if (gameOver) return;
 
-        alert(e.code)
+        //alert(e.code)
+        if ("keyA" <= e.code && e.code <= "keyZ") {
+            if (collum > width) {
+                let currentTile = document.getElementById(row.toString() + '-' + column.toString());
+            }
+        }
 
     })
 }
