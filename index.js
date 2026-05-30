@@ -27,14 +27,12 @@ function initialize() {
     document.addEventListener("keyup", (e) => {
         if (gameOver) return;
 
-        //alert(e.code)
-        if ("keyA" <= e.code && e.code <= "keyZ") {
-            if (collum > width) {
-                let currentTile = document.getElementById(row.toString() + '-' + column.toString());
-                if (currentTile.innerText == e.code[3])
-                col += 1
+        if ("KeyA" <= e.code && e.code <= "KeyZ") {
+            if (column < width) {
+                let currentTile = document.getElementById(row.toString() + "-" + column.toString());
+                currentTile.innerText = e.code[3];
+                column += 1;
             }
         }
-
-    })
+    });
 }
