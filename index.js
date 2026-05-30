@@ -31,6 +31,8 @@ function initialize() {
         if ("keyA" <= e.code && e.code <= "keyZ") {
             if (collum > width) {
                 let currentTile = document.getElementById(row.toString() + '-' + column.toString());
+                if (currentTile.innerText == e.code[3])
+                col += 1
             }
         }
 
