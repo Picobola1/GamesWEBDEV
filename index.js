@@ -41,5 +41,35 @@ function initialize() {
             let currentTile = document.getElementById(row.toString() + "-" + column.toString());
             currentTile.innerText = "";
         }
+        else if (e.code == "Enter") {
+            update();
+            row += 1;
+            column = 0;
+            alert("Ad")
+        }
+        if (!gameOver && row == height) {
+            gameOver == true
+            document.getElementById("answer").innerText = word;
+        }
     });
+}
+function update() {
+    let correct = 0;
+    for (let c = 0; c < width; c++) {
+        let currentTile = document.getElementById(row.toString() + "-" + c.toString());
+        let letter = currentTile.innerText
+        if (word[c] == letter) {
+            tile.classList.add("correct")
+            correct += 1;
+        }
+        else if (word.includes(letter)) {
+            tile.classList.add("present");
+        }
+        else {
+            tile.classList.add("absent")
+        }
+        if (correct == width) {
+            gameOver = true
+        }
+    }
 }
