@@ -51,62 +51,61 @@ function initialize() {
         else if (e.code == "Enter") {
             update();
 
-            row += 1;
-            column = 0;
+            
         }
 
         if (!gameOver && row == height) {
             gameOver = true;
             document.getElementById("answer").innerText = word;
+            return;
         }
     });
 }
 
 function update() {
-    let correct = 0;
-    let letCount = {}; // KENNY {K:1; E:1; N:2; Y:1;}
+    let guess = "";
+    document.getElementById("answer").innerText = "";
 
-    for (let i = 0; i < word.length; i++) {
-        letter = word[i];
-        if (letCount[letter]) {
-            letCount[letter] += 1;
-        }
-        else {
-            letCount[letter] = 1;
-        }
-    }
-    // go again and mark wich ones are in the wrong positions
     for (let c = 0; c < width; c++) {
         let currentTile = document.getElementById(row.toString() + "-" + c.toString());
         let letter = currentTile.innerText;
+        guess += letter;
+    }
+
+    guess = guess.toLowerCase();
+
+    if (!guessList.includes(guess)) {
+        document.getElementById("answer").innerText = "Not In Word List";
+        return;
+    }
+
+    let correct = 0;
+
+    for (let c = 0; c < width; c++) {
+        let currentTile = document.getElementById(row.toString() + "-" + c.toString());
+        let letter = currentTile.innerText.toLowerCase();
 
         if (word[c] == letter) {
             currentTile.classList.add("correct");
             correct += 1;
-            letCount[letter] -= 1;
-
-        }
-        
-
-        if (correct == width) {
-            gameOver = true;
+        } 
+        else if (word.includes(letter)) {
+            currentTile.classList.add("present");
+        } 
+        else {
+            currentTile.classList.add("absent");
         }
     }
 
-    for (let c = 0; c < width; c++) {
-        let currentTile = document.getElementById(row.toString() + "-" + c.toString());
-        let letter = currentTile.innerText;
+    if (correct == width) {
+        gameOver = true;
+    }
 
-        if (!currentTile.classList.contains("correct")) {
-            if (word.includes(letter) && letCount[letter] > 0) {
-                currentTile.classList.add("present");
-                letCount[letter] -= 1;
-            }
-            else {
-                currentTile.classList.add("absent");
-            }
-        }
+    row += 1;
+    column = 0;
 
-  
+    if (!gameOver && row == height) {
+        gameOver = true;
+        document.getElementById("answer").innerText = word;
     }
 }
