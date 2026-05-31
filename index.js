@@ -58,7 +58,17 @@ function initialize() {
 
 function update() {
     let correct = 0;
+    let letCount = {}; // KENNY {K:1; E:1; N:2; Y:1;}
 
+    for (let i = 0; i < word.length; i++) {
+        if (letCount[letter]) {
+            letCount[letter] += 1;
+        }
+        else {
+            letCount[letter] = 1;
+        }
+    }
+    // go again and mark wich ones are in the wrong positions
     for (let c = 0; c < width; c++) {
         let currentTile = document.getElementById(row.toString() + "-" + c.toString());
         let letter = currentTile.innerText;
@@ -66,16 +76,30 @@ function update() {
         if (word[c] == letter) {
             currentTile.classList.add("correct");
             correct += 1;
+            letCount[letter] -= 1;
+
         }
-        else if (word.includes(letter)) {
-            currentTile.classList.add("present");
-        }
-        else {
-            currentTile.classList.add("absent");
-        }
+        
 
         if (correct == width) {
             gameOver = true;
         }
+    }
+
+    for (let c = 0; c < width; c++) {
+        let currentTile = document.getElementById(row.toString() + "-" + c.toString());
+        let letter = currentTile.innerText;
+
+        if (!currentTile.classList.contains("correct")) {
+            if (word.includes(letter) && letCount[letter] > 0) {
+                currentTile.classList.add("present");
+                letCount[letter] -= 1;
+            }
+            else {
+                currentTile.classList.add("absent");
+            }
+        }
+
+  
     }
 }
