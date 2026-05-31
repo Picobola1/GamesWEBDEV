@@ -26,16 +26,20 @@
 
 .correct {
     background-color: green;
-    color: white;
+    color: rgb(0, 0, 0);
     border-color: white
 }
 .present {
-    background-color: yellow;
-    color: white;
+    background-color: rgb(245, 255, 139);
+    color: rgb(0, 0, 0);
     border-color: white
 }
 .absent {
     background-color: darkgray;
-    color: white;
+    color: rgb(0, 0, 0);
     border-color: white
+}
+#answer {
+    
+    text-align: center;
 }

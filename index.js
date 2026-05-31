@@ -61,6 +61,7 @@ function update() {
     let letCount = {}; // KENNY {K:1; E:1; N:2; Y:1;}
 
     for (let i = 0; i < word.length; i++) {
+        letter = word[i];
         if (letCount[letter]) {
             letCount[letter] += 1;
         }
